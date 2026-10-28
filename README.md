@@ -28,7 +28,7 @@ Repository: https://github.com/Aerobabel/biom
 
 `render.yaml` is an optional Blueprint that groups the service and database in the **MVP** project, **Production** environment. For an existing service/database, use their existing names and connection string instead of provisioning duplicates.
 
-Web service: Node, Frankfurt, build `npm ci && npm run check && npm run build`, start `npm start`, health `/api/health`. Set `NODE_ENV=production`, `NODE_VERSION=22.16.0`, `DATABASE_URL` to the Render database's **internal** URL, and `ADMIN_EMAIL` to the account email allowed to moderate. The database schema is initialized automatically and sample content is inserted idempotently. Photos are stored in the database for this small MVP, so no ephemeral upload directory is used.
+Web service: Node, Frankfurt, build `npm ci --include=dev && npm run check && npm run build`, start `npm start`, health `/api/health`. The tracked `.npmrc` includes build dependencies even when `NODE_ENV=production`. Set `NODE_ENV=production`, `NODE_VERSION=22.16.0`, `DATABASE_URL` to the Render database's **internal** URL, and `ADMIN_EMAIL` to the account email allowed to moderate. The database schema is initialized automatically and sample content is inserted idempotently. Photos are stored in the database for this small MVP, so no ephemeral upload directory is used.
 
 Production intentionally refuses to run without PostgreSQL or an explicitly configured persistent disk (`DATA_DIR`). This prevents accounts and uploads disappearing after a Render restart.
 
