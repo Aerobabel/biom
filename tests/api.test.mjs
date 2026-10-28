@@ -266,6 +266,33 @@ test("Biom accounts, social flows, privacy, moderation and durable storage", asy
     await t.test(
       "spoofed uploads and cross-origin mutations are rejected",
       async () => {
+        const uploaded = await request(
+          "/upload",
+          {
+            data: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+a7eoAAAAASUVORK5CYII=",
+          },
+          user,
+        );
+        assert.equal(uploaded.status, 200);
+        const photo = await fetch(origin + uploaded.data.url);
+        assert.equal(photo.status, 200);
+        assert.equal(photo.headers.get("content-type"), "image/png");
+        const photoPost = await request(
+          "/posts",
+          {
+            text: "Фото нашего района",
+            interest: "Прогулки",
+            image: uploaded.data.url,
+          },
+          user,
+        );
+        assert.equal(photoPost.status, 201);
+        assert.equal(
+          (await request("/data")).data.posts.find(
+            (p) => p.id === photoPost.data.id,
+          ).image,
+          uploaded.data.url,
+        );
         assert.equal(
           (
             await request(

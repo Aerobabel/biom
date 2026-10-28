@@ -2191,6 +2191,12 @@ function PostCard({
               {post.district}
               <i>·</i>
               {relative(post.createdAt)}
+              {author?.demo && (
+                <>
+                  <i>·</i>
+                  <span>демо</span>
+                </>
+              )}
             </small>
           </span>
         </button>
