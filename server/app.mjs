@@ -296,12 +296,14 @@ export async function createApp(store, { production = false } = {}) {
               .sort((a, b) => a.createdAt - b.createdAt),
           }))
           .sort((a, b) => b.createdAt - a.createdAt),
-        events: events.map((e) => ({
-          ...e,
-          attendees:
-            e.baseAttendees + joins.filter((j) => j.eventId === e.id).length,
-          joined: joins.some((j) => j.eventId === e.id && j.userId === uid),
-        })),
+        events: events
+          .sort((a, b) => a.date - b.date)
+          .map((e) => ({
+            ...e,
+            attendees:
+              e.baseAttendees + joins.filter((j) => j.eventId === e.id).length,
+            joined: joins.some((j) => j.eventId === e.id && j.userId === uid),
+          })),
         unread: messages.filter((m) => m.to === uid && !m.read).length,
         interests,
         cities,
@@ -592,24 +594,20 @@ export async function createApp(store, { production = false } = {}) {
   app.use("/api", (req, res) => res.status(404).json({ error: "Не найдено" }));
   app.use((e, req, res, next) => {
     if (e instanceof z.ZodError)
-      return res
-        .status(400)
-        .json({
-          error:
-            e.issues[0]?.message === "Выберите город и район из списка"
-              ? "Выберите город и район из списка"
-              : "Проверьте заполненные поля: имя, email, пароль от 8 символов и хотя бы один интерес.",
-        });
+      return res.status(400).json({
+        error:
+          e.issues[0]?.message === "Выберите город и район из списка"
+            ? "Выберите город и район из списка"
+            : "Проверьте заполненные поля: имя, email, пароль от 8 символов и хотя бы один интерес.",
+      });
     if (e.type === "entity.too.large")
       return res.status(413).json({ error: "Файл слишком большой" });
     if (!e.status) console.error("Request failed:", e.message);
-    res
-      .status(e.status || 500)
-      .json({
-        error: e.status
-          ? e.message
-          : "Не удалось выполнить запрос. Попробуйте ещё раз.",
-      });
+    res.status(e.status || 500).json({
+      error: e.status
+        ? e.message
+        : "Не удалось выполнить запрос. Попробуйте ещё раз.",
+    });
   });
   return app;
 }

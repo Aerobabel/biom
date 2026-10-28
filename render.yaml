@@ -26,5 +26,5 @@ projects:
           - name: biom-db
             plan: free
             region: frankfurt
-            databaseName: biom
-            user: biom
+            databaseName: biom_db
+            user: biom_db_user
