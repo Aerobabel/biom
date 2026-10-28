@@ -4,5 +4,6 @@ data/
 .env
 .env.*
 !.env.example
+biom-app/
 outputs/
 *.tsbuildinfo

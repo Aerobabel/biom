@@ -1,0 +1,35 @@
+{
+  "name": "biom",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "node server/index.mjs",
+    "build": "vite build",
+    "start": "node server/index.mjs",
+    "check": "tsc --noEmit",
+    "test": "node --test tests/api.test.mjs"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.1.0",
+    "lucide-react": "^0.468.0",
+    "pg": "^8.16.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "sql.js": "^1.13.0",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "prettier": "^3.9.10",
+    "typescript": "^5.7.3",
+    "vite": "^6.1.0"
+  }
+}
