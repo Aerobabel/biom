@@ -694,15 +694,15 @@ export default function App() {
                           <i />
                         </div>
                         <span className="hero-person hp-one">
-                          <Avatar person={data.people[0]} size={73} />
+                          <Avatar person={localPeople[0]} size={73} />
                           <span>☕</span>
                         </span>
                         <span className="hero-person hp-two">
-                          <Avatar person={data.people[1]} size={56} />
+                          <Avatar person={localPeople[1]} size={56} />
                           <span>🏃</span>
                         </span>
                         <span className="hero-person hp-three">
-                          <Avatar person={data.people[2]} size={65} />
+                          <Avatar person={localPeople[2]} size={65} />
                           <span>✦</span>
                         </span>
                         <span className="hero-star star-one">✳</span>
@@ -1430,13 +1430,13 @@ export default function App() {
                     <span className="map-park park-two" />
                     <span className="map-label">{location.district}</span>
                     <span className="map-avatar ma-one">
-                      <Avatar person={data.people[0]} size={33} />
+                      <Avatar person={localPeople[0]} size={33} />
                     </span>
                     <span className="map-avatar ma-two">
-                      <Avatar person={data.people[1]} size={31} />
+                      <Avatar person={localPeople[1]} size={31} />
                     </span>
                     <span className="map-avatar ma-three">
-                      <Avatar person={data.people[2]} size={29} />
+                      <Avatar person={localPeople[2]} size={29} />
                     </span>
                     <span className="map-you">
                       <i />
